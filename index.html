@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Test</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        video {
+            width: 640px;
+            height: 480px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+
+<video id="video" autoplay></video>
+
+<script>
+    // Доступ до відеопотоку камери
+    const video = document.getElementById('video');
+
+    // Перевірка підтримки getUserMedia API
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Параметри: захоплення відео
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            // Передача потоку в елемент відео
+            video.srcObject = stream;
+        })
+        .catch(function(error) {
+            console.log("Помилка доступу до камери: ", error);
+        });
+    } else {
+        alert("Ваш браузер не підтримує доступ до камери.");
+    }
+</script>
+
+</body>
+</html>
